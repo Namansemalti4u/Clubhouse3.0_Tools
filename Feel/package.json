@@ -1,10 +1,14 @@
 {
-    "name": "com.neela.feel-wrapper",
+    "name": "com.neela.clubhouse-tools-feel",
     "version": "1.0.0",
     "displayName": "Clubhouse Tool: Feel",
     "description": "A wrapper to use feel package efficiently.",
     "dependencies": {
       "com.unity.textmeshpro": "3.0.6"
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/Namansemalti4u/Clubhouse3.0_Tools.git?path=Feel"
     }
   }
   
