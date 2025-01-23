@@ -1,0 +1,10 @@
+{
+    "name": "com.neela.feel-wrapper",
+    "version": "1.0.0",
+    "displayName": "Clubhouse Tool: Feel",
+    "description": "A wrapper to use feel package efficiently.",
+    "dependencies": {
+      "com.unity.textmeshpro": "3.0.6"
+    }
+  }
+  
