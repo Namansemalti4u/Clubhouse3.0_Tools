@@ -96,7 +96,7 @@ namespace Clubhouse.Tools
         {
             Scale(feedback, a_duration);
         });
-        public static void Scale(MMF_Player a_feedbackPlayer, float a_initiaScale, float a_targetScale, float a_duration = -1f)
+        public static void Scale(MMF_Player a_feedbackPlayer, float a_initialScale, float a_targetScale, float a_duration = -1f)
         => Play<MMF_Position>(a_feedbackPlayer, (feedback) =>
         {
             Scale(feedback, a_initialScale, a_targetScale, a_duration);
