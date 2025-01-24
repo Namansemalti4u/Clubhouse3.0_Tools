@@ -96,10 +96,23 @@ namespace Clubhouse.Tools
         {
             Scale(feedback, a_duration);
         });
+        public static void Scale(MMF_Player a_feedbackPlayer, float a_initiaScale, float a_targetScale, float a_duration = -1f)
+        => Play<MMF_Position>(a_feedbackPlayer, (feedback) =>
+        {
+            Scale(feedback, a_initialScale, a_targetScale, a_duration);
+        });
 
         public static void Scale(MMF_Scale a_feedback, float a_duration) => Play(a_feedback, () =>
         {
             a_feedback.AnimateScaleDuration = a_duration;
+        });
+        public static void Scale(MMF_Scale a_feedback, float a_initiaScale, float a_targetScale, float a_duration = -1f)
+        => Play<MMF_Scale>(a_feedback, ()
+        {
+            feedback.RemapCurveZero = a_initiaScale;
+            feedback.RemapCurveOne = a_targetScale;
+            if (a_duration >= 0f)
+                feedback.AnimateScaleDuration = a_duration;
         });
         #endregion
 

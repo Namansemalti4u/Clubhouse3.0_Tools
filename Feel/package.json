@@ -1,6 +1,6 @@
 {
     "name": "com.neela.clubhouse-tools-feel",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "displayName": "Clubhouse Tool: Feel",
     "description": "A wrapper to use feel package efficiently.",
     "dependencies": {
