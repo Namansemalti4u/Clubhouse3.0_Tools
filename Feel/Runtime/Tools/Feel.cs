@@ -107,7 +107,7 @@ namespace Clubhouse.Tools
             a_feedback.AnimateScaleDuration = a_duration;
         });
         public static void Scale(MMF_Scale a_feedback, float a_initiaScale, float a_targetScale, float a_duration = -1f)
-        => Play<MMF_Scale>(a_feedback, ()
+        => Play<MMF_Scale>(a_feedback, () =>
         {
             feedback.RemapCurveZero = a_initiaScale;
             feedback.RemapCurveOne = a_targetScale;
