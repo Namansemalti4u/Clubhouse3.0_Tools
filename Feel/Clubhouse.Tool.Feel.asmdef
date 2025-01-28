@@ -2,7 +2,8 @@
     "name": "Clubhouse.Tool.Feel",
     "rootNamespace": "",
     "references": [
-        "GUID:4a1cb1490dc4df8409b2580d6b44e75e"
+        "GUID:4a1cb1490dc4df8409b2580d6b44e75e",
+        "GUID:c2dabefd15ab2c34f891e08c2f3002b6"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
