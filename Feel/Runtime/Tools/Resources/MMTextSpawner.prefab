@@ -149,7 +149,7 @@ MonoBehaviour:
   TargetCamera: {fileID: 0}
   AnimateScale: 1
   RemapScaleZero: {x: 0, y: 0}
-  RemapScaleOne: {x: 0.5, y: 0.5}
+  RemapScaleOne: {x: 0.3, y: 0.3}
   AnimateScaleCurve:
     serializedVersion: 2
     m_Curve:
