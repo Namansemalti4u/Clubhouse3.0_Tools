@@ -1,12 +1,13 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System.Threading.Tasks;
+using MoreMountains.Feedbacks;
+using Clubhouse.Helper;
 
 namespace Clubhouse.Tools
 {
-    using System.Threading.Tasks;
     using Games.Common;
-    using MoreMountains.Feedbacks;
 
     public class TextEffect : MonoBehaviour
     {
@@ -19,7 +20,7 @@ namespace Clubhouse.Tools
         private string text;
         private float timerDuration;
         private Timer timer;
-        private bool isActive, isbreakableStreak;
+        private bool isActive, isTimeDependent;
 
         private void Update()
         {
@@ -27,7 +28,7 @@ namespace Clubhouse.Tools
             UpdateTimer();
         }
 
-        public void Init(Vector3 a_position, float a_scale, string a_text, bool isCountable, bool a_isTimerVisible, bool a_isbreakable, int a_count = 1, float a_timer = 1f)
+        public void Init(Vector3 a_position, float a_scale, string a_text, bool isCountable, bool a_isTimerVisible, bool a_isTimeDependent, int a_count = 1, float a_timer = 1f)
         {
             transform.position = Camera.main.WorldToScreenPoint(a_position);
             transform.localScale = 0.5f * a_scale * Vector3.one;
@@ -50,7 +51,39 @@ namespace Clubhouse.Tools
 
             text = a_text;
             count = a_count;
-            isbreakableStreak = a_isbreakable;
+            isTimeDependent = a_isTimeDependent;
+
+            isActive = true;
+
+            UpdateEffect(text, count);
+            feedBacks[0].PlayFeedbacks();
+        }
+
+        public void Init(Vector2 a_rectPosition, float a_scale, string a_text, bool isCountable, bool a_isTimerVisible, bool a_isTimeDependent, 
+                int a_count = 1, float a_timer = 1f, AnchorType a_anchorType = AnchorType.Center)
+        {
+            RectHelper.SetRectPosition(rectTransform, a_rectPosition, a_anchorType);
+            transform.localScale = 0.5f * a_scale * Vector3.one;
+
+            var spawnScaleFeedback = Feel.GetFeedback<MMF_Scale>(feedBacks[0]);
+            spawnScaleFeedback.RemapCurveZero = a_scale * 0.5f;
+            spawnScaleFeedback.RemapCurveOne = a_scale;
+
+            var despawnScaleFeedback = Feel.GetFeedback<MMF_Scale>(feedBacks[2]);
+            despawnScaleFeedback.RemapCurveZero = a_scale;
+            despawnScaleFeedback.RemapCurveOne = a_scale * 0.5f;
+
+            countText.gameObject.SetActive(isCountable);
+            timerSlider.gameObject.SetActive(a_isTimerVisible);
+
+
+            timerDuration = a_timer;
+            timer = new Timer(timerDuration);
+            timer.Enable();
+
+            text = a_text;
+            count = a_count;
+            isTimeDependent = a_isTimeDependent;
 
             isActive = true;
 
@@ -76,10 +109,29 @@ namespace Clubhouse.Tools
             TextEffectSpawner.Instance.Despawn(this);
         }
 
-        public void IncrementCount()
+        public void IncrementCount(float newTimerDuration = -1)
         {
             feedBacks[1].PlayFeedbacks();
             UpdateEffect(text, ++count);
+            if (newTimerDuration > 0)
+            {
+                timer.SetTimerDuration(newTimerDuration);
+            }
+        }
+
+        public void DecrementCount(float newTimerDuration = -1)
+        {
+            feedBacks[3].PlayFeedbacks();
+            UpdateEffect(text, --count);
+            if (newTimerDuration > 0)
+            {
+                timer.SetTimerDuration(newTimerDuration);
+            }
+        }
+
+        public void UpdateSliderValue(float a_value)
+        {
+            timerSlider.value = a_value;
         }
 
         private async void UpdateEffect(string a_text, int a_count)
@@ -93,7 +145,7 @@ namespace Clubhouse.Tools
 
         private void UpdateTimer()
         {
-            if (!timer.IsRunning) return;
+            if (!timer.IsRunning || !isTimeDependent) return;
 
             timer.Update(Time.deltaTime);
             if (timer.IsFinished)
