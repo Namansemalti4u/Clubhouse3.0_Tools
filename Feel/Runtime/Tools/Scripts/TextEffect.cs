@@ -22,6 +22,8 @@ namespace Clubhouse.Tools
         private Timer timer;
         private bool isActive, isTimeDependent;
 
+        public bool IsActive => isActive;
+
         private void Update()
         {
             if (!isActive) return;
