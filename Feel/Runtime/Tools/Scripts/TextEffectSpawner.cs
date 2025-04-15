@@ -1,10 +1,12 @@
 using UnityEngine;
 using Clubhouse.Helper;
+using UnityEngine.UI;
 
 namespace Clubhouse.Tools
 {
     public class TextEffectSpawner : SingletonPersistent<TextEffectSpawner>
     {
+        [SerializeField] private CanvasScaler canvasScaler;
         private ObjectPoolManager<TextEffect> pool;
 
         protected override void Awake()
@@ -23,6 +25,11 @@ namespace Clubhouse.Tools
         public void Despawn(TextEffect a_textEffect)
         {
             pool.Return(a_textEffect);
+        }
+
+        public void SetOrientation(bool a_isLandScape)
+        {
+            canvasScaler.referenceResolution = a_isLandScape ? new Vector2(1920f, 1080f) : new Vector2(1080f, 1920f);
         }
     }
 }

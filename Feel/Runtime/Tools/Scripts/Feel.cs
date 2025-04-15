@@ -7,11 +7,13 @@ namespace Clubhouse.Tools
     public static partial class Feel
     {
         #region Initialization
+        private static GameObject defaultTextSpawner, canvas;
+
         [RuntimeInitializeOnLoadMethod]
         private static void OnRuntimeMethodLoad()
         {
-            GameObject defaultTextSpawner = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("MMTextSpawner"));
-            GameObject canvas = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("FeelCanvas"));
+            defaultTextSpawner = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("MMTextSpawner"));
+            canvas = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("FeelCanvas"));
             UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Haptics"));
         }
         #endregion
@@ -83,6 +85,11 @@ namespace Clubhouse.Tools
             feedback.SetInitialDelay(a_delay);
             callback?.Invoke(feedback);
             return feedback;
+        }
+
+        public static void SetCanvasOrientation(bool a_isLandScape)
+        {
+            canvas.GetComponent<TextEffectSpawner>().SetOrientation(a_isLandScape);
         }
         #endregion
     }
