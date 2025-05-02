@@ -12,22 +12,33 @@ public enum HapticType
     OnTimerEnd
 }
 
-public class HapticManager : SingletonPersistent<HapticManager>
+public class HapticManager : Singleton<HapticManager>
 {
     [Header("Haptic Settings")]
     private bool enableHaptics = true;
     private Coroutine continuousHapticCoroutine;
-
+    
     override protected void Awake()
     {
-        base.Awake();
+        base.Awake();  
+        
+        // Initialize haptics
+        // enableHaptics = AppData.EnableHaptic;
         HapticController.hapticsEnabled = enableHaptics;
     }
 
-    public void SetHapticsEnabled(bool enabled)
+    void Update()
     {
-        enableHaptics = enabled;
-        HapticController.hapticsEnabled = enabled;
+        
+    }
+
+    public void PlayHapticOnButtonPressed()
+    {
+        if (!enableHaptics) return;
+        
+        // Play a impact feedback
+        HapticPatterns.PlayPreset(HapticPatterns.PresetType.LightImpact);
+//        Debug.Log("Haptics feedback played");
     }
 
     public void PlayHaptic(HapticType a_type)
@@ -49,6 +60,12 @@ public class HapticManager : SingletonPersistent<HapticManager>
         HapticPatterns.PlayPreset(presetType);
     }
 
+    public void SetHapticsEnabled(bool enabled)
+    {
+        enableHaptics = enabled;
+        HapticController.hapticsEnabled = enabled;
+    }
+
     // Play a single custom haptic with specified intensity and sharpness
     public void PlayCustomHaptic(float intensity = 1.0f, float sharpness = 0.5f, float duration = 0.1f)
     {
@@ -60,7 +77,7 @@ public class HapticManager : SingletonPersistent<HapticManager>
     public void StartContinuousHaptic(float intensity = 1.0f, float sharpness = 0.5f)
     {
         if (!enableHaptics || continuousHapticCoroutine != null) return;
-
+        
         continuousHapticCoroutine = StartCoroutine(ContinuousHapticRoutine(intensity, sharpness));
     }
 
@@ -89,4 +106,3 @@ public class HapticManager : SingletonPersistent<HapticManager>
         StopContinuousHaptic();
     }
 }
-

@@ -1,10 +1,7 @@
 {
-    "name": "Clubhouse.Tool.Feel",
+    "name": "Clubhouse.Tool.Audio",
     "rootNamespace": "",
     "references": [
-        "GUID:4a1cb1490dc4df8409b2580d6b44e75e",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f",
-        "GUID:57a0b9bc628ab4740af4b6f1f0b2e134",
         "GUID:bf2132858e48fe54fb89d123524ba728"
     ],
     "includePlatforms": [],

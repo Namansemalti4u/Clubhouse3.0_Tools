@@ -3,7 +3,7 @@ using Clubhouse.Helper;
 
 namespace Clubhouse.Tools.FeelWrap
 {
-    public class MMTextSpawnerWrap : SingletonPersistent<MMTextSpawnerWrap>
+    public class MMTextSpawnerWrap : Singleton<MMTextSpawnerWrap>
     {
     }
 }

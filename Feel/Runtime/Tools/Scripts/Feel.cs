@@ -1,6 +1,7 @@
 using UnityEngine;
 using MoreMountains.Feedbacks;
 using System;
+using Clubhouse.Helper;
 
 namespace Clubhouse.Tools
 {
@@ -8,14 +9,15 @@ namespace Clubhouse.Tools
     {
         #region Initialization
         private static GameObject defaultTextSpawner, canvas;
-
-        [RuntimeInitializeOnLoadMethod]
+#if !CLUBHOUSE_MAIN
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void OnRuntimeMethodLoad()
         {
-            defaultTextSpawner = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("MMTextSpawner"));
-            canvas = UnityEngine.Object.Instantiate(Resources.Load<GameObject>("FeelCanvas"));
-            UnityEngine.Object.Instantiate(Resources.Load<GameObject>("Haptics"));
+            defaultTextSpawner = Loader.InstantiateFromResources("MMTextSpawner");
+            canvas = Loader.InstantiateFromResources("FeelCanvas");
+            Loader.InstantiateFromResources("Haptics");
         }
+#endif
         #endregion
 
         #region Core

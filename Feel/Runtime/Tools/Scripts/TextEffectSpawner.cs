@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Clubhouse.Tools
 {
-    public class TextEffectSpawner : SingletonPersistent<TextEffectSpawner>
+    public class TextEffectSpawner : Singleton<TextEffectSpawner>
     {
         [SerializeField] private CanvasScaler canvasScaler;
         private ObjectPoolManager<TextEffect> pool;
