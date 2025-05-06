@@ -27,7 +27,16 @@ namespace Clubhouse.Tools.Audio
         public bool IsPlayingAtSource(AudioSource a_audioSource) => sources.Contains(a_audioSource) && a_audioSource.isPlaying;
         public bool StopSoundAtSource(AudioSource a_audioSource)
         {
-            if (!IsPlayingAtSource(a_audioSource)) return false;
+            if(a_audioSource == null) 
+            {
+                Debug.LogError($"AudioSource is null for sound: {name}");
+                return false;
+            }
+            if (!sources.Contains(a_audioSource)) 
+            {
+                Debug.LogError($"AudioSource is not in sources for sound: {name}");
+                return false;
+            }
             a_audioSource.Stop();
             sources.Remove(a_audioSource);
             return true;

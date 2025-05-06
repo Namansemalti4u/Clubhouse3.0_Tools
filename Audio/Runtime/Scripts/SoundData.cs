@@ -86,7 +86,11 @@ namespace Clubhouse.Tools.Audio
 
         public bool StopSoundAtSource(Sound a_sound, AudioSource a_audioSource)
         {
-            if (!IsPlayingAtSource(a_sound, a_audioSource)) return false;
+            if(a_sound == null)
+            {
+                Debug.LogError("Sound is null!");
+                return false;
+            }
             return a_sound.StopSoundAtSource(a_audioSource);
         }
 

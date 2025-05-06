@@ -1,6 +1,6 @@
 {
   "name": "com.neela.clubhouse-tools-audio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "displayName": "Clubhouse Tool: Audio System",
   "description": "Audio system for Clubhouse.",
   "dependencies": {

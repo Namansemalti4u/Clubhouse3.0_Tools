@@ -288,7 +288,7 @@ public class AudioManager : Singleton<AudioManager>
             a_audioSource.Stop();
             return;
         }
-        info.soundData.StopSoundAtSource(info.sound, a_audioSource);
+        bool isStopped = info.soundData.StopSoundAtSource(info.sound, a_audioSource);
     }
 
     protected override void OnApplicationQuit()
