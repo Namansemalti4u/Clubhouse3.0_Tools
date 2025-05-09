@@ -1,10 +1,10 @@
 {
   "name": "com.neela.clubhouse-tools-audio",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "displayName": "Clubhouse Tool: Audio System",
   "description": "Audio system for Clubhouse.",
   "dependencies": {
-    "com.neela.clubhouse-tools-helper": "1.0.0"
+    "com.neela.clubhouse-tools-helper": "1.0.1"
   },
   "repository": {
     "type": "git",
