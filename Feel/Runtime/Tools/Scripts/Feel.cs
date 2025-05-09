@@ -15,7 +15,7 @@ namespace Clubhouse.Tools
         {
             defaultTextSpawner = Loader.InstantiateFromResources("MMTextSpawner");
             canvas = Loader.InstantiateFromResources("FeelCanvas");
-            Loader.InstantiateFromResources("Haptics");
+            Loader.InstantiateFromResources("HapticManager");
         }
 #endif
         #endregion
