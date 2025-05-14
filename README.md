@@ -1,8 +1,6 @@
 # Cluhouse Tools
 
-
-
-Install Feel by using path:
+* Install Clubhouse API (Common) by using path:
     ```
     https://github.com/Namansemalti4u/Clubhouse3.0_Common.git
     ```
@@ -18,6 +16,11 @@ Install Feel by using path:
     ```
 
 * Install Helper by using path:
+    ```
+    https://github.com/Namansemalti4u/Clubhouse3.0_Tools.git?path=Helper
+    ```
+
+* Install Package locally using reference path:
     ```
     https://github.com/Namansemalti4u/Clubhouse3.0_Tools.git?path=Helper
     ```
