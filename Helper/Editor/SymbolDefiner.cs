@@ -15,7 +15,7 @@ namespace Clubhouse.Helper.Editor
         public static void DefineSymbol(string a_symbol)
         {
             string symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-            if (symbols.Contains(a_symbol)) return;
+            if (HasSymbol(a_symbol)) return;
 
             symbols += ";" + a_symbol;
             PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, symbols);
@@ -25,11 +25,17 @@ namespace Clubhouse.Helper.Editor
         public static void RemoveSymbol(string a_symbol)
         {
             string symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
-            if (!symbols.Contains(a_symbol)) return;
+            if (!HasSymbol(a_symbol)) return;
             
             var newSymbols = symbols.Replace(a_symbol, "").Replace(";;", ";").Trim(';');
             PlayerSettings.SetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup, newSymbols);
             Debug.Log($"[Package] Removed define symbol: {a_symbol}");
+        }
+
+        public static bool HasSymbol(string a_symbol)
+        {
+            string symbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+            return symbols.Contains(a_symbol);
         }
     }
 }
