@@ -1,0 +1,16 @@
+{
+    "name": "Clubhouse.Tool.VisualFX.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:3d3b45720fca0d94a91cece75334872a"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -24,38 +24,6 @@ namespace Clubhouse.Tools
             action?.Invoke(feedback);
             Play(feedback);
         });
-
-        public static void ShowScoreEffect(MMF_Player a_feedbackPlayer, int a_score, Color a_color = default, float a_Delay = 0f)
-        => ShowFloatingText(a_feedbackPlayer, a_color: a_color, a_Delay: a_Delay, action: (feedback) =>
-        {
-            if (a_score >= 0)
-            {
-                feedback.Value = "+" + a_score;
-            }
-            else
-            {
-                feedback.Value = a_score.ToString();
-                feedback.Direction = new Vector3(0, -2, 0);
-            }
-        });
-        #endregion
-
-        #region TextEffect
-        public static TextEffect ShowText(Vector3 a_position, string a_text, bool a_isCountable, bool a_isTimerVisible = false, 
-            int a_count = 1, float a_timer = 1f, float a_scale = 1f, bool a_isTimeDependent = true)
-        {
-            TextEffect effect = TextEffectSpawner.Instance.Spawn();
-            effect.Init(a_position, a_scale, a_text, a_isCountable, a_isTimerVisible, a_isTimeDependent,  a_count, a_timer);
-            return effect;
-        }
-        
-        public static TextEffect ShowText(Vector2 a_rectPosition, string a_text, bool a_isCountable, bool a_isTimerVisible = false, int a_count = 1,
-         float a_timer = 1f, float a_scale = 1f, bool a_isTimeDependent = true, AnchorType a_anchorType = AnchorType.Center)
-        {
-            TextEffect effect = TextEffectSpawner.Instance.Spawn();
-            effect.Init(a_rectPosition, a_scale, a_text, a_isCountable, a_isTimerVisible, a_isTimeDependent,  a_count, a_timer, a_anchorType);
-            return effect;
-        }
         #endregion
     }
 }

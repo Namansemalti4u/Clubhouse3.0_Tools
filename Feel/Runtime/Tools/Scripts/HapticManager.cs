@@ -8,6 +8,7 @@ public enum HapticType
     OnButtonClick,
     OnCorrect,
     OnWrong,
+    OnHit,
     OnGameStart,
     OnTimerEnd
 }

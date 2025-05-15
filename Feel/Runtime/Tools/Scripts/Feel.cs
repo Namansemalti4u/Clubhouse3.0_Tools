@@ -7,19 +7,6 @@ namespace Clubhouse.Tools
 {
     public static partial class Feel
     {
-        #region Initialization
-        private static GameObject defaultTextSpawner, canvas;
-#if !CLUBHOUSE_MAIN
-        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-        private static void OnRuntimeMethodLoad()
-        {
-            defaultTextSpawner = Loader.InstantiateFromResources("MMTextSpawner");
-            canvas = Loader.InstantiateFromResources("FeelCanvas");
-            Loader.InstantiateFromResources("HapticManager");
-        }
-#endif
-        #endregion
-
         #region Core
         public static bool IsNull(MMF_Player a_feedbackPlayer)
         {
@@ -87,11 +74,6 @@ namespace Clubhouse.Tools
             feedback.SetInitialDelay(a_delay);
             callback?.Invoke(feedback);
             return feedback;
-        }
-
-        public static void SetCanvasOrientation(bool a_isLandScape)
-        {
-            canvas.GetComponent<TextEffectSpawner>().SetOrientation(a_isLandScape);
         }
         #endregion
     }

@@ -9,6 +9,7 @@ namespace Clubhouse.Tools
         private static void OnRuntimeMethodLoad()
         {
 #if !CLUBHOUSE_MAIN
+            Loader.InstantiateFromResources("HapticManager");
 #endif
         }
     }
