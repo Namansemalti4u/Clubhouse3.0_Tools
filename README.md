@@ -34,5 +34,5 @@
     "com.neela.clubhouse-tools-audio": "file:../../Clubhouse3.0_Tools/Audio",
     "com.neela.clubhouse-tools-feel": "file:../../Clubhouse3.0_Tools/Feel",
     "com.neela.clubhouse-tools-helper": "file:../../Clubhouse3.0_Tools/Helper",
-    "com.neela.clubhouse-tools-helper": "file:../../Clubhouse3.0_Tools/VisualFX",
+    "com.neela.clubhouse-tools-vfx": "file:../../Clubhouse3.0_Tools/VisualFX",
     ```
