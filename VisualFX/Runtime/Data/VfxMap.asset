@@ -13,8 +13,19 @@ MonoBehaviour:
   m_Name: VfxMap
   m_EditorClassIdentifier: 
   vfxAddresses:
-  - key: Test
-    packType: 4
-    vfxName: Nice
+  - key: Hit
+    packType: 2
+    vfxName: Hit1
+  - key: Steam
+    packType: 2
+    vfxName: Steam
+  - key: SmokeWhite
+    packType: 1
+    vfxName: SmokeWhite
+  - key: FlameThrower
+    packType: 1
+    vfxName: FlameThrower
   vfxCollections:
   - {fileID: 11400000, guid: 44279200fff5f444fba479414007ecee, type: 2}
+  - {fileID: 11400000, guid: 02fade8c49639854ba0fecf06320b1f3, type: 2}
+  - {fileID: 11400000, guid: 649520ff4cd55b64c95c47acbedd0f84, type: 2}
