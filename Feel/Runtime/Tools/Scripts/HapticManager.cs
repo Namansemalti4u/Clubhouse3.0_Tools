@@ -5,6 +5,7 @@ using Clubhouse.Helper;
 
 public enum HapticType
 {
+    None,
     OnButtonClick,
     OnCorrect,
     OnWrong,
@@ -47,6 +48,7 @@ public class HapticManager : Singleton<HapticManager>
         PlayHaptic(a_type switch{
             HapticType.OnButtonClick => HapticPatterns.PresetType.LightImpact,
             HapticType.OnCorrect => HapticPatterns.PresetType.LightImpact,
+            HapticType.OnHit => HapticPatterns.PresetType.LightImpact,
             HapticType.OnWrong => HapticPatterns.PresetType.SoftImpact,
             HapticType.OnGameStart => HapticPatterns.PresetType.Success,
             HapticType.OnTimerEnd => HapticPatterns.PresetType.Success,
