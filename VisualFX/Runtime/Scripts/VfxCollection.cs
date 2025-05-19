@@ -4,31 +4,32 @@ using UnityEngine;
 
 namespace Clubhouse.Tools.VisualEffects
 {
+    [CreateAssetMenu(fileName = "VfxCollection", menuName = "VisualFX/VFX Collection")]
     public class VfxCollection : ScriptableObject
     {
-        public VfxManager.VfxPackage collectionName;
-        public VisualEffect[] vfxList;
-        private Dictionary<string, VisualEffect> vfxDictionary;
+        public VfxPackType collectionName;
+        public VisualEffectRef[] vfxList;
+        private Dictionary<string, VisualEffectRef> vfxDictionary;
 
         public void Initialize()
         {
             vfxDictionary = vfxList.ToDictionary(vfx => vfx.name, vfx => vfx);
         }
 
-        public VisualEffect GetVfx(string name)
+        public VisualEffectRef GetVfx(string name)
         {
             if (vfxDictionary == null)
             {
                 Initialize();
             }
 
-            if (!vfxDictionary.ContainsKey(name))
+            if (vfxDictionary.ContainsKey(name))
             {
-                Debug.LogError($"Vfx with name {name} not found in collection {collectionName}");
-                return default;
+                return vfxDictionary[name];
             }
 
-            return vfxDictionary[name];
+            Debug.LogError($"Vfx with name {name} not found in collection {collectionName}");
+            return default;
         }
     }
 }

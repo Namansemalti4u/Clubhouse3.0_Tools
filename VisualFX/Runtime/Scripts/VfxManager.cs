@@ -1,81 +1,66 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using Clubhouse.Helper;
-using MoreMountains.Feedbacks;
 using UnityEngine;
 
 namespace Clubhouse.Tools.VisualEffects
 {
     public partial class VfxManager : Singleton<VfxManager>
     {
-        [Serializable]
-        public enum VfxPackage
+        public class VfxPlayParams
         {
-            None,
-            EpicToonFX,
-            CartoonFX,
-            HyperCasualFX,
-        }
-        [Serializable]
-        public struct VfxData
-        {
-            public string key;
-            public VfxPackage package;
-            public string vfxName;
-        }
+            public Vector3 position = Vector3.zero;
+            public Vector3 scale = Vector3.one;
+            public Transform parent = null;
+            public Action<ParticleSystem> beforePlay = null;
 
-        [SerializeField] private VfxData[] vfxDatas;
-        [SerializeField] private VfxCollection[] vfxCollections;
-        // private ObjectPoolManager<>[] vfxPoolManager;
-        private Dictionary<string, VfxData> vfxDataDict;
-        private Dictionary<VfxPackage, VfxCollection> vfxCollectionDict;
-
-        public void Initialize()
-        {
-            vfxDataDict = vfxDatas.ToDictionary(data => data.key, data => data);
-            vfxCollectionDict = vfxCollections.ToDictionary(collection => collection.collectionName, collection => collection);
-        }
-
-        public VisualEffect GetVfx(string key)
-        {
-            VfxData vfxData = GetVfxData(key);
-            VfxCollection vfxCollection = GetVfxCollection(vfxData.package);
-            if (vfxCollection == null) return default;
-
-            return vfxCollection.GetVfx(vfxData.vfxName);
-        }
-
-        private VfxData GetVfxData(string key)
-        {
-            if (vfxDataDict == null)
+            public VfxPlayParams()
             {
-                Initialize();
+                position = Vector3.zero;
+                scale = Vector3.one;
+                parent = null;
+                beforePlay = null;
             }
-
-            if (!vfxDataDict.ContainsKey(key))
-            {
-                Debug.LogError($"Vfx with key {key} not found");
-                return default;
-            }
-
-            return vfxDataDict[key];
         }
 
-        private VfxCollection GetVfxCollection(VfxPackage package)
+        [Header("Main")]
+        [SerializeField] private VfxMap vfxMap;
+
+        protected override void Awake()
         {
-            if (vfxCollectionDict == null)
-            {
-                Initialize();
-            }
+            base.Awake();
+            vfxMap.Initialize();
+            InitializeTextFX();
+        }
 
-            if (!vfxCollectionDict.ContainsKey(package))
+        public void ShowVfx(string a_name, VfxPlayParams a_params = null)
+        {
+            if(VfxPooler.Instance == null)
             {
-                Debug.LogError($"Vfx collection with package name {package} not found");
-                return null;
+                Debug.LogError("VfxPooler is not initialized. Put an Instance of VfxPooler in the scene.");
+                return;
             }
+            if (a_params == null) a_params = new VfxPlayParams();
+            (VisualEffect vfx, ObjectPoolManager<VisualEffect> pool) = VfxPooler.Instance.GetVfxFromPool(a_name, a_params.parent);
+            PlayVfx(vfx, pool, a_params);
+        }
 
-            return vfxCollectionDict[package];
+        public GameObject GetVfx(string a_name)
+        {
+            return vfxMap.GetVfx(a_name).prefab;
+        }
+
+        private void PlayVfx(VisualEffect a_vfx, ObjectPoolManager<VisualEffect> a_pool, VfxPlayParams a_params)
+        {
+            if (a_params.parent == null)
+            {
+                a_vfx.transform.position = a_params.position;
+            }
+            else
+            {
+                a_vfx.transform.localPosition = a_params.position;
+            }
+            a_vfx.transform.localScale = a_params.scale;
+            a_vfx.Play(a_pool, a_params.beforePlay);
         }
     }
 }
