@@ -25,6 +25,11 @@
     https://github.com/Namansemalti4u/Clubhouse3.0_Tools.git?path=VisualFX
     ```
 
+* Install Asset Bundle Tool by using path:
+    ```
+    https://github.com/Namansemalti4u/Clubhouse3.0_Tools.git?path=AssetBundle
+    ```
+
 * Install Package locally using reference path:
     1. Open `Packages/manifest.json`
     2. Copy and paste required line from here to manifest.json
@@ -35,4 +40,5 @@
     "com.neela.clubhouse-tools-feel": "file:../../Clubhouse3.0_Tools/Feel",
     "com.neela.clubhouse-tools-helper": "file:../../Clubhouse3.0_Tools/Helper",
     "com.neela.clubhouse-tools-vfx": "file:../../Clubhouse3.0_Tools/VisualFX",
+    "com.neela.clubhouse-tools-assetbundle": "file:../../Clubhouse3.0_Tools/AssetBundle",
     ```
