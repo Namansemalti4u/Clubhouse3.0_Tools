@@ -40,7 +40,7 @@ namespace Clubhouse.Tools.VisualEffects
                 return;
             }
             if (a_params == null) a_params = new VfxPlayParams();
-            (VisualEffect vfx, ObjectPoolManager<VisualEffect> pool) = VfxPooler.Instance.GetVfxFromPool(a_name, a_params.parent);
+            (VisualFX vfx, ObjectPoolManager<VisualFX> pool) = VfxPooler.Instance.GetVfxFromPool(a_name, a_params.parent);
             PlayVfx(vfx, pool, a_params);
         }
 
@@ -49,7 +49,7 @@ namespace Clubhouse.Tools.VisualEffects
             return vfxMap.GetVfx(a_name).prefab;
         }
 
-        private void PlayVfx(VisualEffect a_vfx, ObjectPoolManager<VisualEffect> a_pool, VfxPlayParams a_params)
+        private void PlayVfx(VisualFX a_vfx, ObjectPoolManager<VisualFX> a_pool, VfxPlayParams a_params)
         {
             if (a_params.parent == null)
             {

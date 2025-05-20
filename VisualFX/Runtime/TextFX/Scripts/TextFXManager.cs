@@ -26,18 +26,18 @@ namespace Clubhouse.Tools.VisualEffects
         [Header("TextFX")]
         [SerializeField] private Transform textFXPoolParent;
         private VfxCollection textFXCollection;
-        private Dictionary<TextEffectType, ObjectPoolManager<VisualEffect>> textFXDict;
+        private Dictionary<TextEffectType, ObjectPoolManager<VisualFX>> textFXDict;
 
         private void InitializeTextFX()
         {
             TextEffectType[] typeList = (TextEffectType[])Enum.GetValues(typeof(TextEffectType));
-            textFXDict = new Dictionary<TextEffectType, ObjectPoolManager<VisualEffect>>();
+            textFXDict = new Dictionary<TextEffectType, ObjectPoolManager<VisualFX>>();
             textFXCollection = vfxMap.GetVfxCollection(VfxPackType.TextFX);
 
             foreach (var type in typeList)
             {
-                textFXDict[type] = new ObjectPoolManager<VisualEffect>(
-                    textFXCollection.GetVfx(type.ToString()).prefab.GetComponent<VisualEffect>(),
+                textFXDict[type] = new ObjectPoolManager<VisualFX>(
+                    textFXCollection.GetVfx(type.ToString()).prefab.GetComponent<VisualFX>(),
                     textFXPoolParent,
                     2
                 );
@@ -47,7 +47,7 @@ namespace Clubhouse.Tools.VisualEffects
         public void ShowTextEffect(TextEffectType a_type, VfxPlayParams a_params = default)
         {
             if (a_params == null) a_params = new VfxPlayParams();
-            VisualEffect textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
+            VisualFX textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
             PlayVfx(textFX, textFXDict[a_type], a_params);
         }
 
@@ -65,7 +65,7 @@ namespace Clubhouse.Tools.VisualEffects
         public void ShowTextEffect(TextEffectType a_type, string a_text, int a_count = 0, VfxPlayParams a_params = default)
         {
             if (a_params == null) a_params = new VfxPlayParams();
-            VisualEffect textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
+            VisualFX textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
             CFXR_ParticleText particleText = textFX.gameObject.GetComponent<CFXR_ParticleText>();
             if (particleText != null && particleText.isDynamic)
             {

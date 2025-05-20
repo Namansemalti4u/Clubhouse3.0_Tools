@@ -11,12 +11,12 @@ namespace Clubhouse.Tools.VisualEffects
     }
     
     [RequireComponent(typeof(ParticleSystem))]
-    public class VisualEffect : MonoBehaviour
+    public class VisualFX : MonoBehaviour
     {
         private ParticleSystem ps;
-        private ObjectPoolManager<VisualEffect> pool;
+        private ObjectPoolManager<VisualFX> pool;
 
-        public void Play(ObjectPoolManager<VisualEffect> a_pool, Action<ParticleSystem> a_beforePlay = null)
+        public void Play(ObjectPoolManager<VisualFX> a_pool, Action<ParticleSystem> a_beforePlay = null)
         {
             pool = a_pool;
             ps = GetComponent<ParticleSystem>();
