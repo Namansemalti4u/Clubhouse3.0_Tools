@@ -8,6 +8,17 @@ namespace Clubhouse.Tools.VisualEffects.Editor
     {
         static VfxSymbolDefiner()
         {
+            AddSymbol();
+        }
+
+        [MenuItem("Tools/VisualFX/Define Symbol")]
+        static void DefineSymbol()
+        {
+            AddSymbol();
+        }
+
+        private static void AddSymbol()
+        {
             SymbolDefiner.DefineSymbol("CLUBHOUSE_VFX");
         }
     }
