@@ -1,0 +1,34 @@
+using Clubhouse.Helper;
+using UnityEngine;
+
+public class ScoreTextPooler : Singleton<ScoreTextPooler>
+{
+    [SerializeField] private GameObject scoreTextPrefab;
+    [SerializeField] private RectTransform rect;
+
+    private ObjectPoolManager<ScoreText> scoreTextPool;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        scoreTextPool = new ObjectPoolManager<ScoreText>(scoreTextPrefab.GetComponent<ScoreText>(), transform, 10);
+    }
+
+    public ScoreText GetScoreText(float a_score, Transform a_parent)
+    {
+        return scoreTextPool.Get(transform);
+    }
+
+    public void ReturnScoreText(ScoreText a_scoreText)
+    {
+        scoreTextPool.Return(a_scoreText);
+    }
+
+    public Vector2 GetAnchoredPosition(Transform a_target)
+    {
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(a_target.position);
+        Vector2 localPoint;
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, Camera.main, out localPoint);
+        return screenPoint;
+    }
+}
