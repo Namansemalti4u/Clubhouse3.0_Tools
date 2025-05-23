@@ -14,9 +14,9 @@ public class ScoreTextPooler : Singleton<ScoreTextPooler>
         scoreTextPool = new ObjectPoolManager<ScoreText>(scoreTextPrefab.GetComponent<ScoreText>(), transform, 10);
     }
 
-    public ScoreText GetScoreText(float a_score, Transform a_parent)
+    public ScoreText GetScoreText(Transform a_parent = null)
     {
-        return scoreTextPool.Get(transform);
+        return scoreTextPool.Get(a_parent ?? transform);
     }
 
     public void ReturnScoreText(ScoreText a_scoreText)
@@ -26,7 +26,7 @@ public class ScoreTextPooler : Singleton<ScoreTextPooler>
 
     public Vector2 GetAnchoredPosition(Transform a_target)
     {
-        Vector2 screenPoint = Camera.main.WorldToScreenPoint(a_target.position);
+        Vector2 screenPoint = Camera.main.WorldToScreenPoint(a_target.position) - new Vector3((float)Screen.width / 2, (float)Screen.height / 2, 0);
         Vector2 localPoint;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(rect, screenPoint, Camera.main, out localPoint);
         return screenPoint;

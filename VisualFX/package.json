@@ -1,6 +1,6 @@
 {
   "name": "com.neela.clubhouse-tools-vfx",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Clubhouse Tool: Visual Effects",
   "description": "Visual Effects System of Clubhouse.",
   "repository": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "com.neela.clubhouse-tools-helper": "1.0.0",
-    "com.neela.clubhouse-tools-feel": "2.0.0"
+    "com.neela.clubhouse-tools-feel": "2.0.0",
+    "com.unity.textmeshpro": "3.0.6"
   }
 }
