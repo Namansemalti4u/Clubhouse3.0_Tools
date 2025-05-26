@@ -16,10 +16,8 @@ public class ScoreText : MonoBehaviour
     public void Initialize(string a_text, Transform a_target, bool a_isUp = true, Color a_color = default, float a_delay = 0f, float a_duration = 1f, float a_distance = 1f)
     {
         elapsedTime = 0f;
-
-        // transform.position = Camera.main.WorldToScreenPoint(a_target.position);
         startPosition = ScoreTextPooler.Instance.GetAnchoredPosition(a_target);
-        Debug.Log(startPosition);
+        // Debug.Log(startPosition);
         endPosition = startPosition + new Vector2(0, a_distance * 200 * (a_isUp ? 1 : -1));
         rectTransform.anchoredPosition = startPosition;
         textMeshProUGUI.text = a_text;
@@ -33,10 +31,8 @@ public class ScoreText : MonoBehaviour
     public void InitializeRect(string a_text, RectTransform a_target, bool a_isUp = true, Color a_color = default, float a_delay = 0f, float a_duration = 1f, float a_distance = 1f)
     {
         elapsedTime = 0f;
-
-        // transform.position = Camera.main.WorldToScreenPoint(a_target.position);
         startPosition = a_target.anchoredPosition;
-        Debug.Log(startPosition);
+        // Debug.Log(startPosition);
         endPosition = startPosition + new Vector2(0, a_distance * 200 * (a_isUp ? 1 : -1));
         rectTransform.anchoredPosition = startPosition;
         textMeshProUGUI.text = a_text;
