@@ -1,10 +1,11 @@
 using System;
 using Clubhouse.Helper;
 using UnityEngine;
+using MoreMountains.Feedbacks;
 
 namespace Clubhouse.Tools.VisualEffects
 {
-    public partial class VfxManager : Singleton<VfxManager>
+    public class VfxManager : Singleton<VfxManager>
     {
         public class VfxPlayParams
         {
@@ -24,12 +25,19 @@ namespace Clubhouse.Tools.VisualEffects
 
         [Header("Main")]
         [SerializeField] private VfxMap vfxMap;
+        
+        [Header("TextFX")]
+        [SerializeField] private Transform textFXPoolParent;
+
+        private TextFXManager textFXManager;
+        private ScoreFXManager scoreFXManager;
 
         protected override void Awake()
         {
             base.Awake();
             vfxMap.Initialize();
-            InitializeTextFX();
+            textFXManager = new TextFXManager(textFXPoolParent, vfxMap, this);
+            scoreFXManager = new ScoreFXManager();
         }
 
         public void ShowVfx(string a_name, VfxPlayParams a_params = null)
@@ -61,6 +69,34 @@ namespace Clubhouse.Tools.VisualEffects
             }
             a_vfx.transform.localScale = a_params.scale;
             a_vfx.Play(a_pool, a_params.beforePlay);
+        }
+
+        public void ShowScoreEffect(float a_score, Transform a_target, Color a_color = default, float a_Delay = 0f, float a_duration = 1f, float a_distance = 1f)
+        {
+            scoreFXManager.ShowScoreEffect(a_score, a_target, a_color, a_Delay, a_duration, a_distance);
+        }
+        
+        public void ShowScoreEffectOnRect(float a_score, RectTransform a_target, Color a_color = default, float a_Delay = 0f, float a_duration = 1f, float a_distance = 1f)
+        {
+            scoreFXManager.ShowScoreEffectOnRect(a_score, a_target, a_color, a_Delay, a_duration, a_distance);
+        }
+
+        public void ShowTextEffect(TextEffectType a_type, VfxPlayParams a_params = null)
+        {
+            (VisualFX vfx, ObjectPoolManager<VisualFX> pool, VfxPlayParams vfxparams) = textFXManager.ShowTextEffect(a_type, a_params);
+            PlayVfx(vfx, pool, vfxparams);
+        }
+
+        public void ShowTextEffect(TextEffectType a_type, int a_count, VfxPlayParams a_params = null)
+        {
+            (VisualFX vfx, ObjectPoolManager<VisualFX> pool, VfxPlayParams vfxparams) = textFXManager.ShowTextEffect(a_type, a_count, a_params);
+            PlayVfx(vfx, pool, vfxparams);
+        }
+
+        public void ShowTextEffect(TextEffectType a_type, string a_text, int a_count = 0, VfxPlayParams a_params = null)
+        {
+            (VisualFX vfx, ObjectPoolManager<VisualFX> pool, VfxPlayParams vfxparams) = textFXManager.ShowTextEffect(a_type, a_text, a_count, a_params);
+            PlayVfx(vfx, pool, vfxparams);
         }
     }
 }

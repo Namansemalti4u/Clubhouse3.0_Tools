@@ -21,12 +21,21 @@ namespace Clubhouse.Tools.VisualEffects
         Type4,
         
     }
-    public partial class VfxManager
+    public class TextFXManager
     {
-        [Header("TextFX")]
-        [SerializeField] private Transform textFXPoolParent;
+        private Transform textFXPoolParent;
+        private VfxMap vfxMap;
+        private VfxManager vfxManager;
         private VfxCollection textFXCollection;
         private Dictionary<TextEffectType, ObjectPoolManager<VisualFX>> textFXDict;
+
+        public TextFXManager(Transform a_textFXPoolParent, VfxMap a_vfxMap, VfxManager a_vfxManager)
+        {
+            textFXPoolParent = a_textFXPoolParent;
+            vfxMap = a_vfxMap;
+            vfxManager = a_vfxManager;
+            InitializeTextFX();
+        }
 
         private void InitializeTextFX()
         {
@@ -44,14 +53,14 @@ namespace Clubhouse.Tools.VisualEffects
             }
         }
 
-        public void ShowTextEffect(TextEffectType a_type, VfxPlayParams a_params = default)
+        public (VisualFX, ObjectPoolManager<VisualFX>, VfxManager.VfxPlayParams) ShowTextEffect(TextEffectType a_type, VfxManager.VfxPlayParams a_params = default)
         {
-            if (a_params == null) a_params = new VfxPlayParams();
+            if (a_params == null) a_params = new VfxManager.VfxPlayParams();
             VisualFX textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
-            PlayVfx(textFX, textFXDict[a_type], a_params);
+            return (textFX, textFXDict[a_type], a_params);
         }
 
-        public void ShowTextEffect(TextEffectType a_type, int a_count, VfxPlayParams a_params = default)
+        public (VisualFX, ObjectPoolManager<VisualFX>, VfxManager.VfxPlayParams) ShowTextEffect(TextEffectType a_type, int a_count, VfxManager.VfxPlayParams a_params = default)
         {
             string text = a_type switch
             {
@@ -59,12 +68,12 @@ namespace Clubhouse.Tools.VisualEffects
                 TextEffectType.Perfect => "PERFECT",
                 _ => a_type.ToString()
             };
-            ShowTextEffect(a_type, text, a_count, a_params);
+            return ShowTextEffect(a_type, text, a_count, a_params);
         }
 
-        public void ShowTextEffect(TextEffectType a_type, string a_text, int a_count = 0, VfxPlayParams a_params = default)
+        public (VisualFX, ObjectPoolManager<VisualFX>, VfxManager.VfxPlayParams) ShowTextEffect(TextEffectType a_type, string a_text, int a_count = 0, VfxManager.VfxPlayParams a_params = default)
         {
-            if (a_params == null) a_params = new VfxPlayParams();
+            if (a_params == null) a_params = new VfxManager.VfxPlayParams();
             VisualFX textFX = textFXDict[a_type].Get(a_params.parent == null ? textFXPoolParent : a_params.parent);
             CFXR_ParticleText particleText = textFX.gameObject.GetComponent<CFXR_ParticleText>();
             if (particleText != null && particleText.isDynamic)
@@ -74,7 +83,7 @@ namespace Clubhouse.Tools.VisualEffects
                 else
                     particleText.UpdateText(a_text);
             }
-            PlayVfx(textFX, textFXDict[a_type], a_params);
+            return (textFX, textFXDict[a_type], a_params);
         }
     }
 }
