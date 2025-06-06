@@ -16,6 +16,9 @@ MonoBehaviour:
   - key: Hit
     packType: 2
     vfxName: Hit1
+  - key: Hit2
+    packType: 2
+    vfxName: Hit4
   - key: Steam
     packType: 2
     vfxName: Steam
@@ -25,6 +28,9 @@ MonoBehaviour:
   - key: FlameThrower
     packType: 1
     vfxName: FlameThrower
+  - key: MagicPoof
+    packType: 2
+    vfxName: MagicPoof
   vfxCollections:
   - {fileID: 11400000, guid: 44279200fff5f444fba479414007ecee, type: 2}
   - {fileID: 11400000, guid: 02fade8c49639854ba0fecf06320b1f3, type: 2}
