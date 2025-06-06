@@ -28,6 +28,11 @@ public class ObjectPoolManager<T> where T : MonoBehaviour
         }
     }
 
+    public T Get()
+    {
+        return Get(defaultParent);
+    }
+
     // Get an object from the pool
     public T Get(Transform parent)
     {

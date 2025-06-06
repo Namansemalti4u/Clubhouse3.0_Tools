@@ -2,6 +2,8 @@
 using CodeStage.AntiCheat.ObscuredTypes;
 #endif
 
+using System;
+
 namespace Clubhouse.Games.Common
 {
     /// <summary>
@@ -32,6 +34,7 @@ namespace Clubhouse.Games.Common
         /// Indicates whether the timer is currently running.
         /// </summary>
         private bool isEnabled = false;
+        private Action onTimerFinished;
         #endregion
 
         #region Properties
@@ -61,10 +64,11 @@ namespace Clubhouse.Games.Common
         /// Initializes a new instance of the Timer class.
         /// </summary>
         /// <param name="a_time">The duration of the timer in seconds.</param>
-        public Timer(float a_time)
+        public Timer(float a_time, Action a_onTimerFinished = null)
         {
             timerDuration = a_time;
             currentTime = timerDuration;
+            onTimerFinished = a_onTimerFinished;
         }
         #endregion
 
@@ -93,6 +97,8 @@ namespace Clubhouse.Games.Common
             if (!isEnabled) return;
             if (IsFinished) return;
             currentTime -= a_deltaTime;
+
+            if (IsFinished) onTimerFinished?.Invoke();
         }
 
         /// <summary>

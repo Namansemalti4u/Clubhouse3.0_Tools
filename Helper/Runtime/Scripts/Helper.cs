@@ -80,5 +80,48 @@ namespace Clubhouse.Games.Utilities
             a_values[secondIndex] = temp;
         }
         #endregion
+
+        public static T GetClickedGameObject2D<T>() where T : MonoBehaviour
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+                    RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+                    if (hit)
+                    {
+                        if(hit.collider.TryGetComponent(out T component))
+                        {
+                            return component;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
+
+        public static T GetClickedGameObject<T>() where T : MonoBehaviour
+        {
+            if (Input.touchCount > 0)
+            {
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    Ray ray = Camera.main.ScreenPointToRay(touch.position);
+
+                    if (Physics.Raycast(ray, out RaycastHit hit))
+                    {
+                        if(hit.collider.TryGetComponent(out T component))
+                        {
+                            return component;
+                        }
+                    }
+                }
+            }
+            return null;
+        }
     }
 }
