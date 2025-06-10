@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using PlasticPipe.PlasticProtocol.Messages;
 using UnityEngine;
 
 namespace Clubhouse.Helper
