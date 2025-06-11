@@ -15,21 +15,20 @@ MonoBehaviour:
   collectionName: 2
   vfxList:
   - name: Hit1
-    prefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753,
-      type: 3}
+    prefab: {fileID: 5112403345868107898, guid: 6f34ef0d986e9db4199cf75805f79753, type: 3}
   - name: Hit2
-    prefab: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7,
-      type: 3}
+    prefab: {fileID: 4021103657954561961, guid: 5c755f9bc5253ea418e919994537dcc7, type: 3}
   - name: Hit3
-    prefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2,
-      type: 3}
+    prefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   - name: Hit4
     prefab: {fileID: 100000, guid: 979632a27455af442bd2d8f36eb0ffce, type: 3}
   - name: Steam
-    prefab: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61,
-      type: 3}
+    prefab: {fileID: 8656522925564163052, guid: e509867be4f82f246a95eca1ee5a2d61, type: 3}
   - name: FallingStars
-    prefab: {fileID: 7305185502956871417, guid: 85b062a5517cf8345bb6784ffbed4877,
-      type: 3}
+    prefab: {fileID: 7305185502956871417, guid: 85b062a5517cf8345bb6784ffbed4877, type: 3}
   - name: MagicPoof
     prefab: {fileID: 100018, guid: a40b64bf23366dc42a892af2c6ff6140, type: 3}
+  - name: SmokePuff
+    prefab: {fileID: 100000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  - name: BombExplosion
+    prefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}

@@ -31,6 +31,12 @@ MonoBehaviour:
   - key: MagicPoof
     packType: 2
     vfxName: MagicPoof
+  - key: SmokePuff
+    packType: 2
+    vfxName: SmokePuff
+  - key: BombExplosion
+    packType: 2
+    vfxName: BombExplosion
   vfxCollections:
   - {fileID: 11400000, guid: 44279200fff5f444fba479414007ecee, type: 2}
   - {fileID: 11400000, guid: 02fade8c49639854ba0fecf06320b1f3, type: 2}
